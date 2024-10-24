@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8705955a17d26d648bb9bb5b9681adee, type: 3}
+  m_Name: Level_1
+  m_EditorClassIdentifier: 
+  sceneGameLevel: 0
+  boardHeight: 3
+  boardWidth: 5
+  listUnavailableBoardPosition:
+  - {x: 0, y: 0}
+  - {x: 0, y: 2}
+  - {x: 4, y: 0}
+  - {x: 4, y: 2}
+  listSpawnDataGameBoardUnit:
+  - gameBoardUnitPrefab: {fileID: 4352383018291155130, guid: ef04253d8aa1c0643a747714eb11ff61,
+      type: 3}
+    position: {x: 2, y: 0}
+    listSpawnDataGameBoardUnitCube:
+    - gameBoardUnitCubePrefab: {fileID: -3413557880651090446, guid: 344a9ef6da827254fbf6badbfbf880ea,
+        type: 3}
+      gameBoardCubeType: 0
+      color: 0
+  - gameBoardUnitPrefab: {fileID: 4352383018291155130, guid: ef04253d8aa1c0643a747714eb11ff61,
+      type: 3}
+    position: {x: 3, y: 0}
+    listSpawnDataGameBoardUnitCube:
+    - gameBoardUnitCubePrefab: {fileID: -3413557880651090446, guid: 344a9ef6da827254fbf6badbfbf880ea,
+        type: 3}
+      gameBoardCubeType: 0
+      color: 2
+  - gameBoardUnitPrefab: {fileID: 4352383018291155130, guid: ef04253d8aa1c0643a747714eb11ff61,
+      type: 3}
+    position: {x: 3, y: 1}
+    listSpawnDataGameBoardUnitCube:
+    - gameBoardUnitCubePrefab: {fileID: 2146134405674647661, guid: aedf343d28a278e4ab6b456e3876626c,
+        type: 3}
+      gameBoardCubeType: 2
+      color: 2
+    - gameBoardUnitCubePrefab: {fileID: 4878690821305059296, guid: 2abe135a3754d9c4fb6858f23965aef5,
+        type: 3}
+      gameBoardCubeType: 1
+      color: 1
+  listWinCondition:
+  - cubeColor: 0
+    numberOfCube: 2
+  - cubeColor: 1
+    numberOfCube: 2
+  nextGameLevelSO: {fileID: 0}
