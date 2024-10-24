@@ -7,7 +7,7 @@ namespace JellyField
     [System.Serializable]
     public struct SpawnDataGameBoardUnitCube
     {
-        public GameBoardUnitCube gameBoardUnitCubePrefab;
+        //public GameBoardUnitCube gameBoardUnitCubePrefab;
         public GameBoardUnitCube.CubeType gameBoardCubeType;
         public GameBoardUnitCube.CubeColor color;
     }

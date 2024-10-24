@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static JellyField.GameBoardUnitCube;
 
 namespace JellyField
 {
@@ -155,16 +156,76 @@ namespace JellyField
 
         private void LoadLevel()
         {
+            GameBoardUnitSpawnManager.Instance.ListSpawnGameBoardUnitPosition = gameLevelSO.listSpawnGameBoardUnitPosition;
+
+            GameBoard.Instance.InitializeGameBoardUnit2DMatrix(boardWidth: gameLevelSO.boardWidth, boardHeight: gameLevelSO.boardHeight);
+            GameBoard.Instance.ListUnavailableBoardPosition = gameLevelSO.listUnavailableBoardPosition;
+
             var listSpawnDataGameBoardUnit = gameLevelSO.listSpawnDataGameBoardUnit;
             foreach (var spawnDataGameBoardUnit in listSpawnDataGameBoardUnit)
             {
                 var gameBoardUnitGameObject = Instantiate(spawnDataGameBoardUnit.gameBoardUnitPrefab.gameObject, Vector3.zero, Quaternion.identity);
                 gameBoardUnitGameObject.transform.position = spawnDataGameBoardUnit.position;
+                var gameBoardUnit = gameBoardUnitGameObject.GetComponent<GameBoardUnit>();
+
+
+
 
                 var listSpawnDataGameBoardUnitCube = spawnDataGameBoardUnit.listSpawnDataGameBoardUnitCube;
                 foreach (var spawnDataGameBoardUnitCube in listSpawnDataGameBoardUnitCube)
                 {
-                    var gameBoardUnitCubeGameObject = Instantiate(spawnDataGameBoardUnitCube.gameBoardUnitCubePrefab.gameObject, gameBoardUnitGameObject.transform);
+                    GameObject gameBoardUnitCubeGameObject = null;
+                    switch (spawnDataGameBoardUnitCube.gameBoardCubeType)
+                    {
+                        case GameBoardUnitCube.CubeType.HalfHorizontalDown:
+                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeHalfHorizontalDown.gameObject, gameBoardUnitGameObject.transform);
+
+                            break;
+
+                        case GameBoardUnitCube.CubeType.HalfHorizontalUp:
+                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeHalfHorizontalUp.gameObject, gameBoardUnitGameObject.transform);
+
+                            break;
+
+                        case GameBoardUnitCube.CubeType.HalfVerticalLeft:
+                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeHalfVerticalLeft.gameObject, gameBoardUnitGameObject.transform);
+
+                            break;
+
+                        case GameBoardUnitCube.CubeType.HalfVerticalRight:
+                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeHalfVerticalRight.gameObject, gameBoardUnitGameObject.transform);
+
+                            break;
+
+                        case GameBoardUnitCube.CubeType.QuarterLeftDown:
+                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeQuarterLeftDown.gameObject, gameBoardUnitGameObject.transform);
+
+                            break;
+
+                        case GameBoardUnitCube.CubeType.QuarterLeftUp:
+                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeQuarterLeftUp.gameObject, gameBoardUnitGameObject.transform);
+
+                            break;
+
+                        case GameBoardUnitCube.CubeType.QuarterRightDown:
+                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeQuarterRightDown.gameObject, gameBoardUnitGameObject.transform);
+
+
+                            break;
+
+                        case GameBoardUnitCube.CubeType.QuarterRightUp:
+                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeQuarterRightUp.gameObject, gameBoardUnitGameObject.transform);
+
+                            break;
+
+                        case GameBoardUnitCube.CubeType.Whole:
+                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeWhole.gameObject, gameBoardUnitGameObject.transform);
+                            break;
+
+                        default:
+                            Debug.LogWarning("Unexpected CubeType: " + spawnDataGameBoardUnitCube.gameBoardCubeType); // Log a warning for unexpected types
+                            break;
+                    }
                     var gameBoardUnitCube = gameBoardUnitCubeGameObject.GetComponent<GameBoardUnitCube>();
                     gameBoardUnitCube.GameBoardCubeType = spawnDataGameBoardUnitCube.gameBoardCubeType;
                     gameBoardUnitCube.GameBoardCubeColor = spawnDataGameBoardUnitCube.color;
@@ -173,6 +234,7 @@ namespace JellyField
                 }
 
                 listSpawnedGameObject.Add(gameBoardUnitGameObject);
+                GameBoard.Instance.GetGameBoardUnit2DMatrix()[(int)spawnDataGameBoardUnit.position.x][(int)spawnDataGameBoardUnit.position.y] = gameBoardUnit;
             }
 
         }

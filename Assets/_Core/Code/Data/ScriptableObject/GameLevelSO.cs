@@ -8,6 +8,9 @@ namespace JellyField
     [CreateAssetMenu(fileName = "GameLevelSO", menuName = "ScriptableObject/GameLevelSO")]
     public class GameLevelSO : ScriptableObject
     {
+        public GameBoardUnitCubeListSO gameBoardUnitCubeListSO;
+        public List<Vector2> listSpawnGameBoardUnitPosition;
+
         public SceneGameLevel sceneGameLevel;
         [Range(0, 100)]
         public int boardHeight;
@@ -17,10 +20,8 @@ namespace JellyField
         public List<SpawnDataGameBoardUnit> listSpawnDataGameBoardUnit;
         public List<WinCondition> listWinCondition;
 
-        public List<Vector2> listSpawnGameBoardUnitPosition;
 
 
         public GameLevelSO nextGameLevelSO;
-        
     }
 }

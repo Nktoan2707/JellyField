@@ -6,16 +6,6 @@ namespace JellyField
 {
     public class GameBoardUnit : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        List<GameBoardUnitCube> listGameBoardUnitCube = new List<GameBoardUnitCube>();
     }
 }

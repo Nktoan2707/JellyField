@@ -8,22 +8,28 @@ namespace JellyField
     {
         public enum CubeType
         {
-            Whole,
-            HalfHorizontalUp,
             HalfHorizontalDown,
+            HalfHorizontalUp,
             HalfVerticalLeft,
             HalfVerticalRight,
-            QuarterLeftUp,
-            QuarterRightUp,
             QuarterLeftDown,
+            QuarterLeftUp,
             QuarterRightDown,
+            QuarterRightUp,
+            Whole,
         }
 
         public enum CubeColor
         {
-            Red,
-            Blue,
-            Green,
+            Red,          // Color.red
+            Green,        // Color.green
+            Blue,         // Color.blue
+            Yellow,       // Color.yellow
+            Cyan,         // Color.cyan
+            Magenta,      // Color.magenta
+            White,        // Color.white
+            Black,        // Color.black
+            Gray,         // Color.gray
         }
 
         public CubeType GameBoardCubeType { get; set; }
@@ -50,8 +56,28 @@ namespace JellyField
                     case CubeColor.Green:
                         cubeMaterial.color = Color.green;
                         break;
+                    case CubeColor.Yellow:
+                        cubeMaterial.color = Color.yellow;
+                        break;
+                    case CubeColor.Cyan:
+                        cubeMaterial.color = Color.cyan;
+                        break;
+                    case CubeColor.Magenta:
+                        cubeMaterial.color = Color.magenta;
+                        break;
+                    case CubeColor.White:
+                        cubeMaterial.color = Color.white;
+                        break;
+                    case CubeColor.Black:
+                        cubeMaterial.color = Color.black;
+                        break;
+                    case CubeColor.Gray:
+                        cubeMaterial.color = Color.gray;
+                        break;
+                    default:
+                        cubeMaterial.color = Color.clear; // Default color if not matched
+                        break;
                 }
-
             }
         }
         [SerializeField] GameObject visualGameObject;

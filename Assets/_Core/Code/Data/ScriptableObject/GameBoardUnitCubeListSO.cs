@@ -7,14 +7,14 @@ namespace JellyField
     [CreateAssetMenu(fileName = "GameBoardUnitCubeListSO", menuName = "ScriptableObject/GameBoardUnitCubeListSO")]
     public class GameBoardUnitCubeListSO : ScriptableObject
     {
-        public GameBoardUnitCube gameBoardUnitCubeWhole;
-        public GameBoardUnitCube gameBoardUnitCubeHalfHorizontalUp;
         public GameBoardUnitCube gameBoardUnitCubeHalfHorizontalDown;
+        public GameBoardUnitCube gameBoardUnitCubeHalfHorizontalUp;
         public GameBoardUnitCube gameBoardUnitCubeHalfVerticalLeft;
         public GameBoardUnitCube gameBoardUnitCubeHalfVerticalRight;
-        public GameBoardUnitCube gameBoardUnitCubeQuarterLeftUp;
-        public GameBoardUnitCube gameBoardUnitCubeQuarterRightUp;
         public GameBoardUnitCube gameBoardUnitCubeQuarterLeftDown;
+        public GameBoardUnitCube gameBoardUnitCubeQuarterLeftUp;
         public GameBoardUnitCube gameBoardUnitCubeQuarterRightDown;
+        public GameBoardUnitCube gameBoardUnitCubeQuarterRightUp;
+        public GameBoardUnitCube gameBoardUnitCubeWhole;
     }
 }

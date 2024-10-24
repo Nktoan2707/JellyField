@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81ec1cf2aea2ff4ca10a58ae3e9021e, type: 3}
+  m_Name: GameBoardUnitCubeListSO
+  m_EditorClassIdentifier: 
+  gameBoardUnitCubeWhole: {fileID: -3413557880651090446, guid: 344a9ef6da827254fbf6badbfbf880ea,
+    type: 3}
+  gameBoardUnitCubeHalfHorizontalDown: {fileID: 2146134405674647661, guid: aedf343d28a278e4ab6b456e3876626c,
+    type: 3}
+  gameBoardUnitCubeHalfHorizontalUp: {fileID: 4878690821305059296, guid: 2abe135a3754d9c4fb6858f23965aef5,
+    type: 3}
+  gameBoardUnitCubeHalfVerticalLeft: {fileID: 9097841766536131019, guid: 64fbe7b7244073f47a7c4ad7c8cb38d0,
+    type: 3}
+  gameBoardUnitCubeHalfVerticalRight: {fileID: 6074400882374598303, guid: fd451018a3bdadc409dd2ba914547835,
+    type: 3}
+  gameBoardUnitCubeQuarterLeftUp: {fileID: 5772873231712377434, guid: 0aa2cc3918bd44f47be4f32c750a3bab,
+    type: 3}
+  gameBoardUnitCubeQuarterRightUp: {fileID: 9137399950565218103, guid: ebb0543b596800c4380763774454956d,
+    type: 3}
+  gameBoardUnitCubeQuarterLeftDown: {fileID: 2602763761297011147, guid: d9f605a71a597574982837fd01a7cb49,
+    type: 3}
+  gameBoardUnitCubeQuarterRightDown: {fileID: 4550493505921982139, guid: 4526b99ae77a15146a924f28e613b9c1,
+    type: 3}
