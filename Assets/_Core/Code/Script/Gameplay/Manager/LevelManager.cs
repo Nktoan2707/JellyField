@@ -28,8 +28,6 @@ namespace JellyField
 
         [SerializeField]
         public GameLevelSO gameLevelSO;
-        //[SerializeField]
-        //public GameLevelSO gameLevelSO;
 
         private bool isLevelCleared;
         private bool isGamePaused;
@@ -39,36 +37,12 @@ namespace JellyField
             get => isGamePaused;
             set
             {
-                //if (spawnedGameObjectList == null || Player.Instance == null)
-                //{
-                //    Debug.LogError("Something went wrong when pause/unpause game!");
-                //    return;
-                //}
-
-
-                //Player.Instance.IsEnabled = !value;
                 isGamePaused = value;
                 OnIsGamePausedChanged.Invoke(this, EventArgs.Empty);
             }
         }
 
         private List<GameObject> listSpawnedGameObject;
-
-        //private int _collectedGems;
-
-        //public int CollectedGems
-        //{
-        //    get => _collectedGems;
-        //    set => _collectedGems = value;
-        //}
-
-        //private int _defeatedMonsters;
-
-        //public int DefeatedMonsters
-        //{
-        //    get => _defeatedMonsters;
-        //    set => _defeatedMonsters = value;
-        //}
 
 
         public void HandleWinConditions()
@@ -167,70 +141,15 @@ namespace JellyField
                 var gameBoardUnitGameObject = Instantiate(spawnDataGameBoardUnit.gameBoardUnitPrefab.gameObject, Vector3.zero, Quaternion.identity);
                 gameBoardUnitGameObject.transform.position = spawnDataGameBoardUnit.position;
                 var gameBoardUnit = gameBoardUnitGameObject.GetComponent<GameBoardUnit>();
-
-
-
-
                 var listSpawnDataGameBoardUnitCube = spawnDataGameBoardUnit.listSpawnDataGameBoardUnitCube;
                 foreach (var spawnDataGameBoardUnitCube in listSpawnDataGameBoardUnitCube)
                 {
-                    GameObject gameBoardUnitCubeGameObject = null;
-                    switch (spawnDataGameBoardUnitCube.gameBoardCubeType)
-                    {
-                        case GameBoardUnitCube.CubeType.HalfHorizontalDown:
-                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeHalfHorizontalDown.gameObject, gameBoardUnitGameObject.transform);
+                    var gameBoardUnitCube = GameBoardUnitCube.SpawnCubeByType(spawnDataGameBoardUnitCube.gameBoardCubeType, gameBoardUnit);
+                    gameBoardUnitCube.CubeTypeValue = spawnDataGameBoardUnitCube.gameBoardCubeType;
+                    gameBoardUnitCube.CubeColorValue = spawnDataGameBoardUnitCube.color;
+                    gameBoardUnit.GetListGameBoardUnitCube().Add(gameBoardUnitCube);
 
-                            break;
-
-                        case GameBoardUnitCube.CubeType.HalfHorizontalUp:
-                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeHalfHorizontalUp.gameObject, gameBoardUnitGameObject.transform);
-
-                            break;
-
-                        case GameBoardUnitCube.CubeType.HalfVerticalLeft:
-                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeHalfVerticalLeft.gameObject, gameBoardUnitGameObject.transform);
-
-                            break;
-
-                        case GameBoardUnitCube.CubeType.HalfVerticalRight:
-                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeHalfVerticalRight.gameObject, gameBoardUnitGameObject.transform);
-
-                            break;
-
-                        case GameBoardUnitCube.CubeType.QuarterLeftDown:
-                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeQuarterLeftDown.gameObject, gameBoardUnitGameObject.transform);
-
-                            break;
-
-                        case GameBoardUnitCube.CubeType.QuarterLeftUp:
-                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeQuarterLeftUp.gameObject, gameBoardUnitGameObject.transform);
-
-                            break;
-
-                        case GameBoardUnitCube.CubeType.QuarterRightDown:
-                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeQuarterRightDown.gameObject, gameBoardUnitGameObject.transform);
-
-
-                            break;
-
-                        case GameBoardUnitCube.CubeType.QuarterRightUp:
-                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeQuarterRightUp.gameObject, gameBoardUnitGameObject.transform);
-
-                            break;
-
-                        case GameBoardUnitCube.CubeType.Whole:
-                            gameBoardUnitCubeGameObject = Instantiate(gameLevelSO.gameBoardUnitCubeListSO.gameBoardUnitCubeWhole.gameObject, gameBoardUnitGameObject.transform);
-                            break;
-
-                        default:
-                            Debug.LogWarning("Unexpected CubeType: " + spawnDataGameBoardUnitCube.gameBoardCubeType); // Log a warning for unexpected types
-                            break;
-                    }
-                    var gameBoardUnitCube = gameBoardUnitCubeGameObject.GetComponent<GameBoardUnitCube>();
-                    gameBoardUnitCube.GameBoardCubeType = spawnDataGameBoardUnitCube.gameBoardCubeType;
-                    gameBoardUnitCube.GameBoardCubeColor = spawnDataGameBoardUnitCube.color;
-
-                    listSpawnedGameObject.Add(gameBoardUnitCubeGameObject);
+                    listSpawnedGameObject.Add(gameBoardUnitCube.gameObject);
                 }
 
                 listSpawnedGameObject.Add(gameBoardUnitGameObject);
@@ -271,17 +190,6 @@ namespace JellyField
         //public void Pause()
         //{
         //    Player.Instance.IsEnabled = false;
-        //}
-
-
-
-        //public void StartGame(List<ActionSO> actionSoList)
-        //{
-        //    CleanUp();
-        //    LoadLevel();
-
-        //    Player.Instance.ActionSOList.Clear();
-        //    Player.Instance.ActionSOList = actionSoList;
         //}
     }
 }

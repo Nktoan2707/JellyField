@@ -27,21 +27,6 @@ namespace JellyField
         }
 
 
-        private Dictionary<GameBoardUnitCube.CubeType, int> cubeTypeValues = new Dictionary<GameBoardUnitCube.CubeType, int>
-        {
-            { GameBoardUnitCube.CubeType.HalfHorizontalDown, 2 },
-            { GameBoardUnitCube.CubeType.HalfHorizontalUp, 2 },
-            { GameBoardUnitCube.CubeType.HalfVerticalLeft, 2 },
-            { GameBoardUnitCube.CubeType.HalfVerticalRight, 2 },
-            { GameBoardUnitCube.CubeType.QuarterLeftDown, 1 },
-            { GameBoardUnitCube.CubeType.QuarterLeftUp, 1 },
-            { GameBoardUnitCube.CubeType.QuarterRightDown, 1 },
-            { GameBoardUnitCube.CubeType.QuarterRightUp, 1 },
-            { GameBoardUnitCube.CubeType.Whole, 4 }
-        };
-
-        
-
         private Dictionary<Vector2, bool> spawnGameBoardUnitPositionValues = new Dictionary<Vector2, bool>();
         public Dictionary<Vector2, bool> GetSpawnGameBoardUnitPositionValues()
         {
@@ -72,38 +57,34 @@ namespace JellyField
             }
         }
 
-        public void SpawnGameBoardUnit(Vector3 position)
+        private void SpawnGameBoardUnit(Vector3 position)
         {
-            GameBoardUnitCubeListSO gameBoardUnitCubeListSO = LevelManager.Instance.gameLevelSO.gameBoardUnitCubeListSO;
-            GameObject gameBoardUnitGameObject = new GameObject("GameBoardUnit");
-            gameBoardUnitGameObject.AddComponent<GameBoardUnit>();
-            gameBoardUnitGameObject.transform.position = position;
-            gameBoardUnitGameObject.AddComponent<DraggableGameBoardUnit>();
-            BoxCollider boxCollider = gameBoardUnitGameObject.AddComponent<BoxCollider>();
+            GameObject spawnedGameBoardUnitToBeGameObject = new GameObject("SpawnedGameBoardUnit");
+            GameBoardUnit spawnedGameBoardUnitToBe = spawnedGameBoardUnitToBeGameObject.AddComponent<GameBoardUnit>();
+            spawnedGameBoardUnitToBeGameObject.transform.position = position;
+            spawnedGameBoardUnitToBeGameObject.AddComponent<DraggableGameBoardUnit>();
+            BoxCollider boxCollider = spawnedGameBoardUnitToBeGameObject.AddComponent<BoxCollider>();
             boxCollider.isTrigger = true;
             boxCollider.center = new Vector3(0.5f, 0.5f, -0.5f);
 
-            int valueCount = 4;
+            int valueCount = GameBoardUnit.MAXIMUM_GAME_BOARD_UNIT_TOTAL_CUBE_VALUE;
             List<GameBoardUnitCube.CubeType> exceptionCubeTypeList = new List<GameBoardUnitCube.CubeType>();
             List<GameBoardUnitCube.CubeColor> exceptionCubeColorList = new List<GameBoardUnitCube.CubeColor>();
 
             while (valueCount > 0)
             {
-                GameBoardUnitCube.CubeType cubeType = GetRandomCubeType(exceptionCubeTypeList);
-                if (cubeTypeValues[cubeType] > valueCount)
+                GameBoardUnitCube.CubeType randomizedCubeType = GetRandomCubeType(exceptionCubeTypeList);
+                if (cubeTypeValues[randomizedCubeType] > valueCount)
                 {
                     continue;
                 }
 
-                exceptionCubeTypeList.Add(cubeType);
+                exceptionCubeTypeList.Add(randomizedCubeType);
 
-                valueCount -= cubeTypeValues[cubeType];
-                GameObject gameBoardUnitCubeGameObject = null;
-                switch (cubeType)
+                valueCount -= cubeTypeValues[randomizedCubeType];
+                switch (randomizedCubeType)
                 {
                     case GameBoardUnitCube.CubeType.HalfHorizontalDown:
-                        gameBoardUnitCubeGameObject = Instantiate(gameBoardUnitCubeListSO.gameBoardUnitCubeHalfHorizontalDown.gameObject, gameBoardUnitGameObject.transform);
-
                         // Remove overlapping cube types
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfVerticalLeft);
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfVerticalRight);
@@ -112,8 +93,6 @@ namespace JellyField
                         break;
 
                     case GameBoardUnitCube.CubeType.HalfHorizontalUp:
-                        gameBoardUnitCubeGameObject = Instantiate(gameBoardUnitCubeListSO.gameBoardUnitCubeHalfHorizontalUp.gameObject, gameBoardUnitGameObject.transform);
-
                         // Remove overlapping cube types
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfVerticalLeft);
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfVerticalRight);
@@ -122,8 +101,6 @@ namespace JellyField
                         break;
 
                     case GameBoardUnitCube.CubeType.HalfVerticalLeft:
-                        gameBoardUnitCubeGameObject = Instantiate(gameBoardUnitCubeListSO.gameBoardUnitCubeHalfVerticalLeft.gameObject, gameBoardUnitGameObject.transform);
-
                         // Remove overlapping cube types
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfHorizontalDown);
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfHorizontalUp);
@@ -132,8 +109,6 @@ namespace JellyField
                         break;
 
                     case GameBoardUnitCube.CubeType.HalfVerticalRight:
-                        gameBoardUnitCubeGameObject = Instantiate(gameBoardUnitCubeListSO.gameBoardUnitCubeHalfVerticalRight.gameObject, gameBoardUnitGameObject.transform);
-
                         // Remove overlapping cube types
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfHorizontalDown);
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfHorizontalUp);
@@ -142,40 +117,30 @@ namespace JellyField
                         break;
 
                     case GameBoardUnitCube.CubeType.QuarterLeftDown:
-                        gameBoardUnitCubeGameObject = Instantiate(gameBoardUnitCubeListSO.gameBoardUnitCubeQuarterLeftDown.gameObject, gameBoardUnitGameObject.transform);
-
                         // Remove overlapping cube types
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfHorizontalDown);
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfVerticalLeft);
                         break;
 
                     case GameBoardUnitCube.CubeType.QuarterLeftUp:
-                        gameBoardUnitCubeGameObject = Instantiate(gameBoardUnitCubeListSO.gameBoardUnitCubeQuarterLeftUp.gameObject, gameBoardUnitGameObject.transform);
-
                         // Remove overlapping cube types
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfHorizontalUp);
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfVerticalLeft);
                         break;
 
                     case GameBoardUnitCube.CubeType.QuarterRightDown:
-                        gameBoardUnitCubeGameObject = Instantiate(gameBoardUnitCubeListSO.gameBoardUnitCubeQuarterRightDown.gameObject, gameBoardUnitGameObject.transform);
-
                         // Remove overlapping cube types
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfHorizontalDown);
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfVerticalRight);
                         break;
 
                     case GameBoardUnitCube.CubeType.QuarterRightUp:
-                        gameBoardUnitCubeGameObject = Instantiate(gameBoardUnitCubeListSO.gameBoardUnitCubeQuarterRightUp.gameObject, gameBoardUnitGameObject.transform);
-
                         // Remove overlapping cube types
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfHorizontalUp);
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfVerticalRight);
                         break;
 
                     case GameBoardUnitCube.CubeType.Whole:
-                        gameBoardUnitCubeGameObject = Instantiate(gameBoardUnitCubeListSO.gameBoardUnitCubeWhole.gameObject, gameBoardUnitGameObject.transform);
-
                         // Remove all other cube types since 'Whole' overlaps with all
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfHorizontalDown);
                         exceptionCubeTypeList.Add(GameBoardUnitCube.CubeType.HalfHorizontalUp);
@@ -188,15 +153,16 @@ namespace JellyField
                         break;
 
                     default:
-                        Debug.LogWarning("Unexpected CubeType: " + cubeType); // Log a warning for unexpected types
+                        Debug.LogWarning("Unexpected CubeType: " + randomizedCubeType); // Log a warning for unexpected types
                         break;
                 }
 
+                GameBoardUnitCube spawnedGameBoardUnitCube = GameBoardUnitCube.SpawnCubeByType(randomizedCubeType, spawnedGameBoardUnitToBe);
+                spawnedGameBoardUnitCube.CubeTypeValue = randomizedCubeType;
+                spawnedGameBoardUnitCube.CubeColorValue = GetRandomCubeColor(exceptionCubeColorList);
+                exceptionCubeColorList.Add(spawnedGameBoardUnitCube.CubeColorValue);
 
-                GameBoardUnitCube gameBoardUnitCube = gameBoardUnitCubeGameObject.GetComponent<GameBoardUnitCube>();
-                gameBoardUnitCube.GameBoardCubeColor = GetRandomCubeColor(exceptionCubeColorList);
-                exceptionCubeColorList.Add(gameBoardUnitCube.GameBoardCubeColor);
-
+                spawnedGameBoardUnitToBe.GetListGameBoardUnitCube().Add(spawnedGameBoardUnitCube);
             }
         }
 
@@ -228,6 +194,7 @@ namespace JellyField
 
             // Return a random valid CubeType
             return validCubeTypes[randomIndex];
+            //return CubeType.Whole;
         }
 
         private CubeColor GetRandomCubeColor(List<CubeColor> exceptionColorList)
@@ -258,6 +225,7 @@ namespace JellyField
 
             // Return a random valid CubeColor
             return validColors[randomIndex];
+            //return CubeColor.Green;
         }
 
     }

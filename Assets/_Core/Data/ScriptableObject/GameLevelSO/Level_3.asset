@@ -10,36 +10,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8705955a17d26d648bb9bb5b9681adee, type: 3}
-  m_Name: Level_1
+  m_Name: Level_3
   m_EditorClassIdentifier: 
   gameBoardUnitCubeListSO: {fileID: 11400000, guid: e836d60d8eca23c4c86720c98877ed4f,
     type: 2}
   listSpawnGameBoardUnitPosition:
+  - {x: 0, y: -3}
   - {x: 2, y: -3}
-  sceneGameLevel: 0
-  boardHeight: 3
-  boardWidth: 5
+  sceneGameLevel: 2
+  boardHeight: 5
+  boardWidth: 3
   listUnavailableBoardPosition:
   - {x: 0, y: 0}
-  - {x: 0, y: 2}
-  - {x: 4, y: 0}
-  - {x: 4, y: 2}
+  - {x: 2, y: 0}
   listSpawnDataGameBoardUnit:
   - gameBoardUnitPrefab: {fileID: 4352383018291155130, guid: ef04253d8aa1c0643a747714eb11ff61,
       type: 3}
-    position: {x: 2, y: 0}
+    position: {x: 0, y: 3}
     listSpawnDataGameBoardUnitCube:
-    - gameBoardCubeType: 8
-      color: 0
+    - gameBoardCubeType: 0
+      color: 4
+    - gameBoardCubeType: 5
+      color: 3
+    - gameBoardCubeType: 7
+      color: 5
   - gameBoardUnitPrefab: {fileID: 4352383018291155130, guid: ef04253d8aa1c0643a747714eb11ff61,
       type: 3}
-    position: {x: 3, y: 0}
+    position: {x: 2, y: 2}
     listSpawnDataGameBoardUnitCube:
-    - gameBoardCubeType: 8
+    - gameBoardCubeType: 1
+      color: 1
+    - gameBoardCubeType: 4
+      color: 5
+    - gameBoardCubeType: 6
       color: 3
   listWinCondition:
-  - cubeColor: 4
-    numberOfCube: 4
-  - cubeColor: 1
-    numberOfCube: 4
-  nextGameLevelSO: {fileID: 11400000, guid: a8eee5ce632d84a4b9529954b2476fa2, type: 2}
+  - cubeColor: 3
+    numberOfCube: 8
+  nextGameLevelSO: {fileID: 0}

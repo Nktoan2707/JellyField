@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace JellyField
 {
-    public class Utils : MonoBehaviour
+    public class Utility : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()

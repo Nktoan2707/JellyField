@@ -42,6 +42,7 @@ namespace JellyField
             transform.position = tilePositionOnBoard;
             GameBoard.Instance.GetGameBoardUnit2DMatrix()[(int)transform.position.x][(int)transform.position.y] = gameObject.GetComponent<GameBoardUnit>();
             GameBoardUnitSpawnManager.Instance.GetSpawnGameBoardUnitPositionValues()[lastestPosition] = false;
+            GameBoard.Instance.HandleMatchingAtBoardPosition(transform.position);
             Destroy(this);
         }
 
