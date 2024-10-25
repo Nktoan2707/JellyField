@@ -734,7 +734,6 @@ namespace JellyField
                         break;
                 }
             }
-            return listGameBoardUnitMatchData;
 
             //Done iteration, handle matching data list
             // first, we destroy all matched cubes
